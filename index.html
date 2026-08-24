@@ -37,9 +37,9 @@
   --text3: #4C5E82;
   --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; min-width: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; overflow-wrap: break-word; -webkit-text-size-adjust: 100%; }
 #app { min-height: 100vh; }
 
 h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; }
@@ -223,12 +223,25 @@ code { font-family: 'SF Mono', 'Fira Code', monospace; background: var(--card2);
 .empty-icon { font-size:56px; margin-bottom:16px; }
 
 @media (max-width:640px) {
+  .screen { padding:14px; }
+  h1 { font-size:1.5rem; }
   .mode-grid { grid-template-columns:1fr; }
   .stats-3 { grid-template-columns:1fr 1fr; }
   .study-wrap { flex-direction:column; }
-  .study-sidebar { width:100%; position:static; }
-  .home-title { font-size:1.5rem; }
-  .home-stats { flex-wrap: wrap; }
+  .study-sidebar { width:100%; min-width:0; position:static; }
+  .home-hero { padding:30px 0 22px; }
+  .home-title { font-size:1.45rem; }
+  .home-logo-big img { height:44px !important; }
+  /* KPI bar -> 2x2 grid, full width, hairline separators */
+  .home-stats { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); width:100%; }
+  .home-stat { border-right:none !important; padding:13px 10px; background:var(--card); }
+  .q-card { padding:20px; }
+  .q-text { font-size:1rem; }
+  .opt { padding:12px 14px; gap:11px; }
+  .nav-title { font-size:0.85rem; }
+  .def-card, .study-q, .review-q { padding:16px; }
+  .exam-footer .btn, .fc-btns .btn { width:100%; }
+  .exam-footer, .fc-btns { flex-direction:column; }
 }
 </style>
 </head>
