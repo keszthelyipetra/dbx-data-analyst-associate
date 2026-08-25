@@ -520,14 +520,14 @@ function renderStudyQuestions() {
   Q.forEach(q => { themeCounts[q.theme] = (themeCounts[q.theme]||0)+1; });
   const themes = Object.keys(themeCounts).sort();
   const wrongCount = Q.filter(q => q.wrong).length;
-  const filtered = s.theme === '__wrong__' ? Q.filter(q => q.wrong)
+  const filtered = s.theme === '__wrong__' ? Q.filter(q => q.wrong).slice().sort((a, b) => a.theme.localeCompare(b.theme))
                  : s.theme === 'all' ? Q
                  : Q.filter(q => q.theme === s.theme);
-  const wrongBtn = wrongCount ? `<button class="theme-btn theme-btn-wrong ${s.theme==='__wrong__'?'active':''}" data-theme="__wrong__">🚩 Elrontott kérdések <span class="tc">${wrongCount}</span></button>` : '';
+  const wrongBtn = wrongCount ? `<button class="theme-btn theme-btn-wrong ${s.theme==='__wrong__'?'active':''}" data-theme="__wrong__">🚩 Flagged <span class="tc">${wrongCount}</span></button>` : '';
   const tabs = wrongBtn +
     `<button class="theme-btn ${s.theme==='all'?'active':''}" data-theme="all">All Topics <span class="tc">${Q.length}</span></button>` +
     themes.map(t => `<button class="theme-btn ${s.theme===t?'active':''}" data-theme="${esc(t)}">${esc(t)} <span class="tc">${themeCounts[t]}</span></button>`).join('');
-  const flag = q => q.wrong ? '<span class="flag-badge" title="Ezt elrontottad a képeken">🚩 Elrontva</span>' : '';
+  const flag = q => q.wrong ? '<span class="flag-badge" title="You got this wrong in the screenshots">🚩 Flagged</span>' : '';
   const qCards = filtered.map(q => {
     const cls = 'study-q' + (q.wrong ? ' study-q-wrong' : '');
     // Self-assessment questions: the option ("Yes, I Understood") is meaningless,
